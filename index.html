@@ -216,8 +216,8 @@
         }
 
         .cartoon {
-            width: 300px;
-            height: 300px;
+            width: 350px;
+            height: 350px;
             margin: 0 auto;
             animation: bounce 2s infinite;
         }
@@ -263,27 +263,138 @@
         <div class="celebration-hearts" id="celebrationHearts"></div>
         <div class="success-content">
             <div class="success-message">🎉 She said YES! 🎉</div>
-            <svg class="cartoon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <!-- Boy -->
-                <circle cx="70" cy="50" r="20" fill="#f4a460"/>
-                <path d="M 70 75 L 60 110 M 70 75 L 80 110" stroke="#8b4513" stroke-width="3" fill="none"/>
-                <path d="M 60 110 L 50 140 M 80 110 L 90 140" stroke="#8b4513" stroke-width="3" fill="none"/>
-                <circle cx="65" cy="48" r="2" fill="#000"/>
-                <circle cx="75" cy="48" r="2" fill="#000"/>
-                <path d="M 68 52 Q 70 54 72 52" stroke="#000" stroke-width="1" fill="none"/>
-                
-                <!-- Girl -->
-                <circle cx="130" cy="50" r="20" fill="#f4a460"/>
-                <path d="M 130 75 L 120 110 M 130 75 L 140 110" stroke="#8b4513" stroke-width="3" fill="none"/>
-                <path d="M 120 110 L 110 140 M 140 110 L 150 140" stroke="#8b4513" stroke-width="3" fill="none"/>
-                <circle cx="125" cy="48" r="2" fill="#000"/>
-                <circle cx="135" cy="48" r="2" fill="#000"/>
-                <path d="M 128 52 Q 130 54 132 52" stroke="#000" stroke-width="1" fill="none"/>
-                
-                <!-- Hug -->
-                <path d="M 85 80 Q 100 85 115 80" stroke="#ff69b4" stroke-width="3" fill="none"/>
-                <text x="50" y="180" font-size="20" text-anchor="middle">💕</text>
-                <text x="150" y="180" font-size="20" text-anchor="middle">💕</text>
+            <svg class="cartoon" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="skinGradient" cx="40%" cy="40%">
+                        <stop offset="0%" style="stop-color:#fdbcb4;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#f4a460;stop-opacity:1" />
+                    </radialGradient>
+                    <linearGradient id="hairBoyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3d2817;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#2d1810;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="hairGirlGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#8b4513;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Shadow/Ground -->
+                <ellipse cx="200" cy="380" rx="120" ry="15" fill="rgba(0,0,0,0.1)"/>
+
+                <!-- Girl (on the left) -->
+                <g id="girl">
+                    <!-- Hair -->
+                    <path d="M 140 80 Q 140 40 160 35 Q 180 30 180 55 L 180 95 Q 170 70 160 70 Q 150 70 140 95 Z" fill="url(#hairGirlGradient)"/>
+                    <ellipse cx="160" cy="50" rx="25" ry="30" fill="url(#hairGirlGradient)"/>
+                    
+                    <!-- Head -->
+                    <circle cx="160" cy="95" r="32" fill="url(#skinGradient)"/>
+                    
+                    <!-- Cheeks (blushed) -->
+                    <ellipse cx="135" cy="100" rx="12" ry="8" fill="rgba(255, 182, 193, 0.6)"/>
+                    <ellipse cx="185" cy="100" rx="12" ry="8" fill="rgba(255, 182, 193, 0.6)"/>
+                    
+                    <!-- Eyes -->
+                    <circle cx="148" cy="90" r="4" fill="#000"/>
+                    <circle cx="172" cy="90" r="4" fill="#000"/>
+                    <circle cx="149" cy="88" r="1.5" fill="#fff"/>
+                    <circle cx="173" cy="88" r="1.5" fill="#fff"/>
+                    
+                    <!-- Eye sparkle (happy expression) -->
+                    <path d="M 148 95 Q 150 97 152 95" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 172 95 Q 174 97 176 95" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Nose -->
+                    <line x1="160" y1="95" x2="160" y2="105" stroke="#d4a574" stroke-width="2"/>
+                    
+                    <!-- Mouth (happy smile) -->
+                    <path d="M 155 110 Q 160 115 165 110" stroke="#ff69b4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Body -->
+                    <ellipse cx="160" cy="150" rx="28" ry="40" fill="#ff69b4"/>
+                    
+                    <!-- Arms -->
+                    <ellipse cx="195" cy="145" rx="12" ry="45" fill="url(#skinGradient)" transform="rotate(30 195 145)"/>
+                    <ellipse cx="125" cy="145" rx="12" ry="45" fill="url(#skinGradient)" transform="rotate(-30 125 145)"/>
+                    
+                    <!-- Hands -->
+                    <circle cx="210" cy="120" r="10" fill="url(#skinGradient)"/>
+                    <circle cx="110" cy="120" r="10" fill="url(#skinGradient)"/>
+                    
+                    <!-- Legs -->
+                    <rect x="148" y="185" width="10" height="50" fill="#ff9999" rx="5"/>
+                    <rect x="162" y="185" width="10" height="50" fill="#ff9999" rx="5"/>
+                    
+                    <!-- Feet -->
+                    <ellipse cx="153" cy="238" rx="8" ry="6" fill="#fdbcb4"/>
+                    <ellipse cx="167" cy="238" rx="8" ry="6" fill="#fdbcb4"/>
+                </g>
+
+                <!-- Boy (on the right) -->
+                <g id="boy">
+                    <!-- Hair -->
+                    <path d="M 260 85 Q 260 45 280 40 Q 300 35 300 60 L 300 100 Q 290 70 280 70 Q 270 70 260 100 Z" fill="url(#hairBoyGradient)"/>
+                    <ellipse cx="280" cy="50" rx="28" ry="35" fill="url(#hairBoyGradient)"/>
+                    
+                    <!-- Head -->
+                    <circle cx="280" cy="95" r="32" fill="url(#skinGradient)"/>
+                    
+                    <!-- Cheeks (blushed) -->
+                    <ellipse cx="255" cy="100" rx="12" ry="8" fill="rgba(255, 182, 193, 0.6)"/>
+                    <ellipse cx="305" cy="100" rx="12" ry="8" fill="rgba(255, 182, 193, 0.6)"/>
+                    
+                    <!-- Eyes -->
+                    <circle cx="268" cy="90" r="4" fill="#000"/>
+                    <circle cx="292" cy="90" r="4" fill="#000"/>
+                    <circle cx="269" cy="88" r="1.5" fill="#fff"/>
+                    <circle cx="293" cy="88" r="1.5" fill="#fff"/>
+                    
+                    <!-- Eye sparkle (happy expression) -->
+                    <path d="M 268 95 Q 270 97 272 95" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 292 95 Q 294 97 296 95" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Nose -->
+                    <line x1="280" y1="95" x2="280" y2="105" stroke="#d4a574" stroke-width="2"/>
+                    
+                    <!-- Mouth (happy smile) -->
+                    <path d="M 275 110 Q 280 115 285 110" stroke="#ff69b4" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Body -->
+                    <ellipse cx="280" cy="150" rx="28" ry="40" fill="#6495ed"/>
+                    
+                    <!-- Arms -->
+                    <ellipse cx="315" cy="145" rx="12" ry="45" fill="url(#skinGradient)" transform="rotate(-30 315 145)"/>
+                    <ellipse cx="245" cy="145" rx="12" ry="45" fill="url(#skinGradient)" transform="rotate(30 245 145)"/>
+                    
+                    <!-- Hands -->
+                    <circle cx="330" cy="120" r="10" fill="url(#skinGradient)"/>
+                    <circle cx="230" cy="120" r="10" fill="url(#skinGradient)"/>
+                    
+                    <!-- Legs -->
+                    <rect x="268" y="185" width="10" height="50" fill="#4169e1" rx="5"/>
+                    <rect x="282" y="185" width="10" height="50" fill="#4169e1" rx="5"/>
+                    
+                    <!-- Feet -->
+                    <ellipse cx="273" cy="238" rx="8" ry="6" fill="#fdbcb4"/>
+                    <ellipse cx="287" cy="238" rx="8" ry="6" fill="#fdbcb4"/>
+                </g>
+
+                <!-- Arms wrapping around in a hug -->
+                <g id="hug-arms">
+                    <!-- Girl's arms wrapping around boy -->
+                    <path d="M 185 140 Q 230 135 250 145" stroke="url(#skinGradient)" stroke-width="14" fill="none" stroke-linecap="round"/>
+                    <!-- Boy's arms wrapping around girl -->
+                    <path d="M 275 140 Q 230 135 210 145" stroke="url(#skinGradient)" stroke-width="14" fill="none" stroke-linecap="round"/>
+                </g>
+
+                <!-- Hearts floating around them -->
+                <g id="floating-hearts">
+                    <text x="100" y="80" font-size="24" fill="#ff1493" opacity="0.8">💕</text>
+                    <text x="300" y="85" font-size="24" fill="#ff1493" opacity="0.8">💕</text>
+                    <text x="180" y="40" font-size="20" fill="#ff69b4" opacity="0.7">💕</text>
+                    <text x="220" y="50" font-size="20" fill="#ff69b4" opacity="0.7">💕</text>
+                </g>
             </svg>
             <div class="footer-message">I love you so much! 💕</div>
         </div>
