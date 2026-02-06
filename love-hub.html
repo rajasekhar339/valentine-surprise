@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story - Raj & Munni 💕</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDemoKey123"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff1493;
+            --secondary: #ff69b4;
+            --light: #ffeef8;
+            --dark: #8b0a50;
+            --accent: #ffb3d9;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Trebuchet MS', cursive, sans-serif;
+            background: linear-gradient(135deg, var(--light) 0%, #ffe0ec 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-logo {
+            font-size: 1.5em;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9em;
+        }
+
+        .nav-links a:hover {
+            transform: scale(1.1);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.1) 0%, rgba(255, 105, 180, 0.1) 100%);
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            color: var(--dark);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.1);
+            transition: 0.3s;
+            animation: popIn 0.6s ease-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            color: var(--primary);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            color: var(--dark);
+        }
+
+        /* Reasons Grid */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .reason-card {
+            background: linear-gradient(135deg, var(--light) 0%, var(--accent) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.1);
+            transition: 0.3s;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reason-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.2);
+        }
+
+        .reason-number {
+            font-size: 2em;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .reason-text {
+            font-size: 1.1em;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Search Box */
+        .search-box {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            font-size: 1em;
+            margin-bottom: 2rem;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        /* Photo Gallery */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .photo-slot {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--light) 0%, var(--accent) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            border: 3px dashed var(--primary);
+            cursor: pointer;
+            transition: 0.3s;
+            overflow: hidden;
+        }
+
+        .photo-slot:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.2);
+        }
+
+        .photo-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* Milestones */
+        .milestones-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .milestone {
+            display: flex;
+            margin-bottom: 3rem;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .milestone-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin-right: 2rem;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(255, 20, 147, 0.4);
+        }
+
+        .milestone-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.1);
+            flex-grow: 1;
+        }
+
+        .milestone-date {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-title {
+            font-size: 1.3em;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-description {
+            color: #666;
+            font-size: 1em;
+        }
+
+        /* Map */
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.1);
+            margin-top: 2rem;
+        }
+
+        /* Song Section */
+        .song-container {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.3);
+        }
+
+        .song-title {
+            font-size: 2.5em;
+            margin-bottom: 1rem;
+        }
+
+        .song-artist {
+            font-size: 1.3em;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .song-player {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .song-lyrics {
+            background: white;
+            color: var(--dark);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            font-size: 0.95em;
+            line-height: 2;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--dark);
+            margin-top: 4rem;
+            border-top: 2px solid var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .nav-links {
+                gap: 0.8rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8em;
+            }
+
+            .reasons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                💕 Our Love Story
+            </div>
+            <div class="nav-links">
+                <a onclick="showSection('dashboard')">📊 Dashboard</a>
+                <a onclick="showSection('song')">🎵 Our Song</a>
+                <a onclick="showSection('reasons')">💭 Reasons</a>
+                <a onclick="showSection('photos')">📸 Photos</a>
+                <a onclick="showSection('milestones')">📅 Milestones</a>
+                <a onclick="showSection('map')">🗺️ Places</a>
+                <a onclick="goToProposal()">💎 Proposal</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- DASHBOARD SECTION -->
+        <div id="dashboard" class="section active">
+            <div class="hero">
+                <h1>Raj & Munni 💕</h1>
+                <p>Our Love Story in Data</p>
+                <p style="font-size: 0.9em; color: #666;">Since 15th June 2020</p>
+            </div>
+
+            <div class="dashboard">
+                <div class="stat-card">
+                    <div style="font-size: 2em;">📅</div>
+                    <div class="stat-label">Days Together</div>
+                    <div class="stat-number" id="daysCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2em;">💒</div>
+                    <div class="stat-label">Days Married</div>
+                    <div class="stat-number" id="marriedDays">0</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2em;">👶</div>
+                    <div class="stat-label">Ajju's Age</div>
+                    <div class="stat-number" id="ajjuAge">0</div>
+                    <div style="font-size: 0.8em; color: #999;">Days old</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2em;">✈️</div>
+                    <div class="stat-label">Vacations</div>
+                    <div class="stat-number">1</div>
+                    <div style="font-size: 0.8em; color: #999;">Maldives</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SONG SECTION -->
+        <div id="song" class="section">
+            <div class="song-container">
+                <div style="font-size: 4em; margin-bottom: 1rem;">🎵</div>
+                <div class="song-title">Love Me Like You Do</div>
+                <div class="song-artist">Ellie Goulding</div>
+                <div class="song-player">
+                    <p style="margin-bottom: 1rem;">🎧 From "Fifty Shades of Grey"</p>
+                    <button class="cta-button">▶ Play on Your Music App</button>
+                </div>
+                <div class="song-lyrics">
+                    <strong>Why this song means everything to us:</strong><br><br>
+                    This song represents our love perfectly. The passion, the intensity, the way it makes us feel alive when we're together. 
+                    Every time we hear it, we're reminded of that magical feeling we had when we first fell in love. 💕<br><br>
+                    <strong>Key Lyrics:</strong><br>
+                    "Touch me like you do, like you do"<br>
+                    "What are you waiting for?"<br>
+                    "I'm falling even more in love with you"<br><br>
+                    Our favorite moment: The entire bridge where it builds up to pure emotion ✨
+                </div>
+            </div>
+        </div>
+
+        <!-- REASONS SECTION -->
+        <div id="reasons" class="section">
+            <h2 style="text-align: center; color: var(--primary); font-size: 2.5em; margin-bottom: 1rem;">💭 365 Reasons I Love Munni</h2>
+            <input type="text" class="search-box" id="searchBox" placeholder="Search reasons... (try: smile, laugh, mother, etc.)">
+            
+            <div class="reasons-grid" id="reasonsGrid">
+                <!-- Reasons will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- PHOTOS SECTION -->
+        <div id="photos" class="section">
+            <h2 style="text-align: center; color: var(--primary); font-size: 2.5em; margin-bottom: 2rem;">📸 Our Photo Gallery</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">Click on any photo frame to upload your memories together</p>
+            <div class="photo-gallery" id="photoGallery">
+                <!-- Photo slots will be generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- MILESTONES SECTION -->
+        <div id="milestones" class="section">
+            <h2 style="text-align: center; color: var(--primary); font-size: 2.5em; margin-bottom: 3rem;">📅 Our Love Timeline</h2>
+            <div class="milestones-timeline">
+                <div class="milestone">
+                    <div class="milestone-dot"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-date">15 June 2020</div>
+                        <div class="milestone-title">🌟 The Day We Met</div>
+                        <div class="milestone-description">It all started here. The moment our eyes met, the world changed forever. Thank you for that moment.</div>
+                    </div>
+                </div>
+
+                <div class="milestone">
+                    <div class="milestone-dot"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-date">23 May 2021</div>
+                        <div class="milestone-title">💒 We Got Married</div>
+                        <div class="milestone-description">The best decision we ever made. Standing before everyone, promising forever to the love of my life.</div>
+                    </div>
+                </div>
+
+                <div class="milestone">
+                    <div class="milestone-dot"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-date">15 September 2021</div>
+                        <div class="milestone-title">✈️ Maldives Vacation</div>
+                        <div class="milestone-description">Paradise on earth with the person I love most. Crystal blue waters and endless love. 🌴</div>
+                    </div>
+                </div>
+
+                <div class="milestone">
+                    <div class="milestone-dot"></div>
+                    <div class="milestone-content">
+                        <div class="milestone-date">11 August 2023</div>
+                        <div class="milestone-title">👶 Ajju Was Born</div>
+                        <div class="milestone-description">Our love multiplied. The day our family grew and we became parents. Ajju, you're our greatest blessing! 💕</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAP SECTION -->
+        <div id="map" class="section">
+            <h2 style="text-align: center; color: var(--primary); font-size: 2.5em; margin-bottom: 2rem;">🗺️ Places We've Been</h2>
+            <div id="map" style="width: 100%; height: 500px; border-radius: 15px; box-shadow: 0 4px 15px rgba(255, 20, 147, 0.1);"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>💕 Created with love by Raj for Munni 💕</p>
+        <p>Our Love Story - Forever Growing</p>
+    </footer>
+
+    <script>
+        // All 30+ Reasons
+        const reasons = [
+            "The way you smile makes my world brighter ✨",
+            "Your laugh is my favorite sound in the universe 😄",
+            "You have the kindest heart I've ever known 💖",
+            "The way you love our child melts my heart 👨‍👩‍👧",
+            "You're my best friend and soulmate 👫",
+            "Your strength inspires me every single day 💪",
+            "You make me want to be a better person 🌟",
+            "The little things you do show you care 🤍",
+            "Your dedication to our family is beautiful 👨‍👩‍👧‍👦",
+            "You light up every room you enter ✨",
+            "Your dreams are my dreams 🌈",
+            "The way you hold my hand feels like home 🏠",
+            "You love me unconditionally 💕",
+            "Your cooking fills our home with love 🍳",
+            "You're an amazing mother 👩‍👧",
+            "Your eyes have seen me through everything 👀",
+            "You celebrate my wins like they're yours 🎉",
+            "The way you listen makes me feel heard 👂",
+            "Your courage amazes me every day 🦁",
+            "You make ordinary moments magical ✨",
+            "Your beauty isn't just physical, it's inside too 💫",
+            "You're the reason my heart smiles 😊",
+            "The way you kiss me still gives me butterflies 🦋",
+            "You balance me perfectly 🌙",
+            "Your loyalty means everything to me 🤝",
+            "You make me laugh even on bad days 😂",
+            "The way you support my dreams means so much 🌠",
+            "You're my safe place ❤️",
+            "Your presence alone brings me peace 🕊️",
+            "I fall in love with you more every day 💑"
+        ];
+
+        // Calculate days
+        function calculateDays() {
+            const firstMet = new Date(2020, 5, 15); // June 15, 2020
+            const marriage = new Date(2021, 4, 23); // May 23, 2021
+            const ajjuBorn = new Date(2023, 7, 11); // August 11, 2023
+            const today = new Date();
+
+            const daysTogether = Math.floor((today - firstMet) / (1000 * 60 * 60 * 24));
+            const daysMarried = Math.floor((today - marriage) / (1000 * 60 * 60 * 24));
+            const ajjuAge = Math.floor((today - ajjuBorn) / (1000 * 60 * 60 * 24));
+
+            document.getElementById('daysCount').textContent = daysTogether;
+            document.getElementById('marriedDays').textContent = daysMarried;
+            document.getElementById('ajjuAge').textContent = ajjuAge;
+        }
+
+        // Populate reasons
+        function populateReasons(filter = '') {
+            const grid = document.getElementById('reasonsGrid');
+            grid.innerHTML = '';
+
+            reasons
+                .filter(reason => reason.toLowerCase().includes(filter.toLowerCase()))
+                .forEach((reason, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'reason-card';
+                    card.innerHTML = `
+                        <div class="reason-number">#${index + 1}</div>
+                        <div class="reason-text">${reason}</div>
+                    `;
+                    grid.appendChild(card);
+                });
+        }
+
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            populateReasons(e.target.value);
+        });
+
+        // Populate photo slots
+        function populatePhotos() {
+            const gallery = document.getElementById('photoGallery');
+            for (let i = 0; i < 30; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'photo-slot';
+                slot.innerHTML = `📷 <br><small>Photo ${i + 1}</small>`;
+                gallery.appendChild(slot);
+            }
+        }
+
+        // Section switching
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+            if (sectionId === 'map') {
+                setTimeout(initMap, 100);
+            }
+        }
+
+        // Go to proposal
+        function goToProposal() {
+            window.location.href = 'index.html';
+        }
+
+        // Initialize map
+        function initMap() {
+            const maldives = { lat: 4.1796, lng: 73.5080 };
+            const bangalore = { lat: 12.9716, lng: 77.5946 };
+
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: maldives,
+                styles: [
+                    { elementType: "geometry", stylers: [{ color: "#f5f5f5" }] },
+                    { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+                    { elementType: "labels.text.fill", stylers: [{ color: "#616161" }] }
+                ]
+            });
+
+            // Maldives marker
+            new google.maps.Marker({
+                position: maldives,
+                map: map,
+                title: "Our Maldives Vacation ✈️ (Sept 15, 2021)",
+                icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+            });
+
+            // Bangalore marker
+            new google.maps.Marker({
+                position: bangalore,
+                map: map,
+                title: "Our Home 🏠 Bangalore, India",
+                icon: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
+            });
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            calculateDays();
+            populateReasons();
+            populatePhotos();
+        });
+    </script>
+</body>
+</html>
